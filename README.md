@@ -75,6 +75,24 @@ claude plugin install orange-cat@modofclaude --scope user
 - **`/cat`** เปิดแผงที่มีแมวส้มวิ่งไปมา
 - ทุกครั้งที่คำสั่งหรือเครื่องมือที่ Claude ใช้เกิด error แมวจะตกใจทำตาโต `( O.O )` แล้วกระโดด พร้อมนับว่า error ไปแล้วกี่ครั้ง
 
+### 🐈 แถม: แมวใน prompt ของ PowerShell
+
+ไม่ใช่ม็อดของ Claude Code แต่เป็นไฟล์ [powershell/orange-cat-prompt.ps1](powershell/orange-cat-prompt.ps1) ที่ทำให้ช่อง Terminal ของ PowerShell มีแมวนำหน้า และตกใจเมื่อคำสั่งที่คุณพิมพ์เองเกิด error
+
+```
+🐈 PS C:\project> aaa.py
+...error...
+🙀 meow! (1) PS C:\project>
+```
+
+ติดตั้งเองได้ใน 3 ขั้นตอน:
+
+1. เปิดไฟล์ profile ด้วยคำสั่ง `New-Item -ItemType Directory -Force (Split-Path $PROFILE); notepad $PROFILE`
+2. คัดลอกเนื้อหาทั้งหมดในไฟล์ [orange-cat-prompt.ps1](powershell/orange-cat-prompt.ps1) ไปวาง แล้วกด Save
+3. ถ้า Windows ยังไม่อนุญาตให้รันสคริปต์ ให้รัน `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` ซึ่งเป็นการเปลี่ยนการตั้งค่าความปลอดภัยของเครื่อง จึงควรตัดสินใจเองก่อนรัน จากนั้นเปิดหน้าต่าง PowerShell ใหม่
+
+ไฟล์นี้เปลี่ยนแค่หน้าตาของ prompt ไม่ต่อเครือข่าย ไม่เขียนไฟล์ และไม่รันอะไรเบื้องหลัง ถ้าไม่อยากได้แล้ว เปิด `notepad $PROFILE` แล้วลบตั้งแต่บรรทัด `>>>` ถึง `<<<` ออก
+
 ## ความเป็นส่วนตัว
 
 ม็อดทั้งหมดไม่เรียกเครือข่าย ไม่เรียกโมเดล และไม่ส่งข้อมูลออกไปเอง ตรวจได้จากบรรทัด `calls:` ของคำสั่ง `claude plugin validate <ม็อด>`
