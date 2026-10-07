@@ -13,7 +13,7 @@
       "name": "thai-prompt-kit",
       "source": "./thai-prompt-kit",
       "description": "คำสั่งพรอมต์ภาษาไทย /th-* · แถบดาวให้คะแนนพรอมต์สดขณะพิมพ์ บอกว่าขาดอะไร (เป้าหมาย บริบท ข้อจำกัด รูปแบบ รายละเอียด) · สไตล์คำตอบครูไทย",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "license": "MIT",
       "category": "productivity",
       "keywords": [

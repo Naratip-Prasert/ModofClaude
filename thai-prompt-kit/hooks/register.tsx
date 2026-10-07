@@ -79,7 +79,12 @@ export const register: Register = on => {
     const box = await next(e)
     const s = isCoachable(box.text) ? score(box.text) : null
     // only write on a change, so typing inside one score redraws nothing
-    if (!same(s, await read($, draft))) await update($, draft, () => s)
+    if (!same(s, await read($, draft))) {
+      await update($, draft, () => s)
+      // the terminal's hint row is not drawn again for a state change alone while one types (it
+      // kept the first key's score), so ask for it; the engine folds calls past 30 a second
+      $.ui.invalidate('ui.render')
+    }
     return box
   })
 
