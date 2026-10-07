@@ -1,11 +1,19 @@
 {
   "name": "thai-prompt-kit",
-  "version": "0.1.0",
-  "description": "ชุดเครื่องมือเขียนพรอมต์ภาษาไทย: คำสั่งสำเร็จรูป /th-*, โค้ชให้คะแนนพรอมต์แบบดาว และสไตล์คำตอบ 'ครูไทย'",
-  "author": { "name": "Naratip-Prasert", "url": "https://github.com/Naratip-Prasert" },
+  "version": "0.2.0",
+  "description": "ชุดเครื่องมือเขียนพรอมต์ภาษาไทย: คำสั่งสำเร็จรูป /th-*, แถบดาวให้คะแนนพรอมต์สดขณะพิมพ์ (ตัดคำไทย รู้คำพิมพ์ผิด แยกประเภทพรอมต์) และสไตล์คำตอบครูไทย",
+  "author": {
+    "name": "Naratip-Prasert",
+    "url": "https://github.com/Naratip-Prasert"
+  },
   "license": "MIT",
   "homepage": "https://github.com/Naratip-Prasert/ModofClaude",
   "repository": "https://github.com/Naratip-Prasert/ModofClaude",
-  "keywords": ["thai", "prompt", "coach", "ภาษาไทย"],
+  "keywords": [
+    "thai",
+    "prompt",
+    "coach",
+    "ภาษาไทย"
+  ],
   "types": "./types/index.d.ts"
 }

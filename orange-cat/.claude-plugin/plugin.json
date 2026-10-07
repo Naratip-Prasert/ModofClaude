@@ -1,0 +1,18 @@
+{
+  "name": "orange-cat",
+  "version": "0.1.0",
+  "description": "แผงแมวส้มวิ่งเล่น กระโดดตกใจทุกครั้งที่เครื่องมือหรือโค้ดเกิด error; /cat เปิดหรือปิด",
+  "author": {
+    "name": "Naratip-Prasert",
+    "url": "https://github.com/Naratip-Prasert"
+  },
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "repository": "https://github.com/Naratip-Prasert/ModofClaude",
+  "homepage": "https://github.com/Naratip-Prasert/ModofClaude",
+  "keywords": [
+    "cat",
+    "fun",
+    "error"
+  ]
+}
