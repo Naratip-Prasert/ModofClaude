@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "modofclaude",
+  "owner": { "name": "Naratip-Prasert", "url": "https://github.com/Naratip-Prasert" },
+  "metadata": { "description": "Claude Code mods สำหรับคนไทย: ชุดพรอมต์ภาษาไทย และธีมหน้าจอสุดน่ารัก" },
+  "plugins": [
+    {
+      "name": "thai-prompt-kit",
+      "source": "./thai-prompt-kit",
+      "description": "คำสั่งพรอมต์สำเร็จรูปภาษาไทย (/th-better /th-explain /th-plan /th-review /th-fix /th-commit) โค้ชให้ดาวพรอมต์ และสไตล์คำตอบครูไทย",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["thai", "prompt", "coach"]
+    },
+    {
+      "name": "thai-vibes",
+      "source": "./thai-vibes",
+      "description": "แถบสถานะทักทายตามเวลาพร้อมวันที่ พ.ศ. แผงช้างน้อย สุภาษิตประจำวัน สถิติเซสชัน และฉลองเมื่อครบรอบ",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "fun",
+      "keywords": ["thai", "theme", "statusline"]
+    }
+  ]
+}

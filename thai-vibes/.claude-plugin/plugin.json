@@ -1,0 +1,11 @@
+{
+  "name": "thai-vibes",
+  "version": "0.1.0",
+  "description": "แต่งหน้าจอ Claude Code ให้มีชีวิตชีวา: แถบสถานะทักทายตามเวลา วันที่ไทย พ.ศ., แผง /vibes มีช้างน้อย สุภาษิตประจำวัน และสถิติเซสชัน พร้อมฉลองเมื่อทำงานครบรอบ",
+  "author": { "name": "Naratip-Prasert", "url": "https://github.com/Naratip-Prasert" },
+  "license": "MIT",
+  "homepage": "https://github.com/Naratip-Prasert/ModofClaude",
+  "repository": "https://github.com/Naratip-Prasert/ModofClaude",
+  "keywords": ["thai", "theme", "statusline", "fun", "ภาษาไทย"],
+  "types": "./types/index.d.ts"
+}
