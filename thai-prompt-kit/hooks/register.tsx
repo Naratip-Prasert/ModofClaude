@@ -2,7 +2,7 @@ import { atom, read, update } from 'claude-code'
 import type { Register } from 'claude-code'
 
 import type { CoachMode, Mark, Score } from '../types'
-import { DIMS, KIND_TEXT, SHORT, isCoachable, score, starText, tip } from './score'
+import { DIMS, KIND_TEXT, SHORT, isCoachable, score, starText, tailText, tip } from './score'
 
 const coachMode = atom({ plugin: 'thai-prompt-kit', key: 'coachMode' } as const, 'on')
 const draft = atom({ plugin: 'thai-prompt-kit', key: 'draft' } as const, null)
@@ -96,7 +96,19 @@ export const register: Register = on => {
   })
 
   // below whatever the other plugins draw here (the context bar), so draw theirs first
+  // the terminal: the stars ride the end of the hint row under the prompt. The band above the
+  // prompt holds one plugin's tree, and a plugin ahead in the chain (the context bar) can take it.
+  on('ui.render', { component: 'PromptHint' }, async ($, e, next) => {
+    if (e.surface !== 'terminal') return next(e)
+    const mode = await read($, coachMode)
+    const s = await read($, draft)
+    if (mode === 'off' || s === null || !e.props.isDraft) return next(e)
+    return next({ ...e, props: { ...e.props, tail: tailText(s) } })
+  })
+
+  // the desktop: a band under the context bar, with marks for every part and a tip
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
+    if (e.surface === 'terminal') return next(e)
     const mode = await read($, coachMode)
     const s = await read($, draft)
     if (e.props.hasSurvey || mode === 'off' || s === null) return next(e)

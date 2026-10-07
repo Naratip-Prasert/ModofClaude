@@ -1,7 +1,7 @@
 import { expect, test } from 'claude-code/testing'
 
 import type { Dim, Mark, PromptKind } from '../types'
-import { isCoachable, score, words } from '../hooks/score'
+import { isCoachable, score, tailText, words } from '../hooks/score'
 
 // [prompt, the marks it must get]; a part left out is not checked
 type Case = [string, Partial<Record<Dim, Mark>>]
@@ -115,6 +115,11 @@ test('a clear question gets full stars without rules or format', async () => {
   expect(s.kind).toBe('ask')
   expect(s.stars).toBe(5)
   expect(s.missing).toEqual([])
+})
+
+test('the terminal line names only what is missing', async () => {
+  expect(tailText(score('แก้บั๊ก'))).toBe('✍️ สั่งงาน ★☆☆☆☆ 1 ✗ข้อจำกัด ✗รูปแบบ ✗รายละเอียด ◐เป้าหมาย ◐บริบท')
+  expect(tailText(score('ทำไมฟังก์ชัน scorePrompt ใน hooks/score.ts ถึงให้ดาวผิด'))).toBe('✍️ คำถาม ★★★★★ 5 ครบ!')
 })
 
 test('a misspelling within one letter matches the word meant', async () => {

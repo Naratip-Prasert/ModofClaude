@@ -418,6 +418,12 @@ export function score(text: string): Score {
 
 export const stars = (n: number) => '★'.repeat(Math.floor(n)) + '☆'.repeat(5 - Math.floor(n))
 export const starText = (n: number) => `${stars(n)} ${Number.isInteger(n) ? n : n.toFixed(1)}`
+// one line for the end of the terminal's hint row: the stars and only what is missing or half there
+export function tailText(s: Score): string {
+  const gaps = s.missing.map(d => `${s.marks[d] === 0 ? '✗' : '◐'}${SHORT[d]}`)
+  return `✍️ ${KIND_TEXT[s.kind]} ${starText(s.stars)}${gaps.length > 0 ? ` ${gaps.join(' ')}` : ' ครบ!'}`
+}
+
 export const tip = (s: Score): string | null => {
   const d = s.missing[0]
   return d === undefined ? null : TIPS[d][s.marks[d] === 0 ? 0 : 1]
