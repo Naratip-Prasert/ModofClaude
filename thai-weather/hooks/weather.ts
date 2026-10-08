@@ -3,6 +3,9 @@
 
 export type Place = { name: string; lat: number; lon: number }
 
+// until /weather set names another place
+export const DEFAULT_PLACE: Place = { name: 'กรุงเทพฯ', lat: 13.75, lon: 100.5 }
+
 export type Now = {
   temp: number
   feels: number

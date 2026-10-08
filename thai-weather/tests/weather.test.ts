@@ -54,3 +54,20 @@ test('/weather set finds the place, keeps it, and puts the forecast in the statu
   // only the place name and rounded coordinates go out
   expect(asked.some(u => u.includes('latitude=18.79&longitude=98.98'))).toBe(true)
 })
+
+test('with no place set, the forecast is for Bangkok', async ($, on) => {
+  const asked: string[] = []
+  on('http.fetch', (_$$, e) => {
+    asked.push(e.url)
+    return { value: { status: 200, ok: true, headers: {}, text: e.url.includes('air-quality') ? AIR : FORECAST } }
+  })
+  on('store.get', () => ({ value: undefined }))
+  on('store.set', () => ({ value: undefined }))
+  on('session.start', ($$, e) => ({ cwd: e.cwd }))
+  on('command.register', () => ({ value: { command: 'weather' } }))
+  await $.session.start({ cwd: '/', surface: 'terminal', isInteractive: true })
+
+  const r = await $.command.run({ command: 'weather', args: '' })
+  expect(r.text).toContain('กรุงเทพฯ')
+  expect(asked.some(u => u.includes('latitude=13.75&longitude=100.5'))).toBe(true)
+})

@@ -1,15 +1,15 @@
 import type { EngineInterface, Register } from 'claude-code'
 
-import { airUrl, forecastUrl, geocodeUrl, parseNow, parsePlace, report, statusLine } from './weather'
+import { DEFAULT_PLACE, airUrl, forecastUrl, geocodeUrl, parseNow, parsePlace, report, statusLine } from './weather'
 import type { Now, Place } from './weather'
 
 const EVERY_MS = 30 * 60 * 1000
 
 // the place is kept in this plugin's store on this machine: it never leaves except as the
 // rounded coordinates in the forecast request
-async function placeOf($: EngineInterface): Promise<Place | null> {
+async function placeOf($: EngineInterface): Promise<Place> {
   const p = (await $.store.get('place')) as Place | undefined
-  return p && typeof p.lat === 'number' && typeof p.lon === 'number' ? p : null
+  return p && typeof p.lat === 'number' && typeof p.lon === 'number' ? p : DEFAULT_PLACE
 }
 
 async function fetchNow($: EngineInterface, p: Place): Promise<Now | null> {
@@ -26,10 +26,6 @@ async function refresh($: EngineInterface): Promise<string> {
     return 'ปิดอยู่'
   }
   const p = await placeOf($)
-  if (!p) {
-    $.ui.status('⛅ ตั้งเมืองด้วย /weather set <จังหวัด>')
-    return 'ยังไม่ได้ตั้งเมือง'
-  }
   try {
     const n = await fetchNow($, p)
     if (!n) return 'ดึงพยากรณ์ไม่สำเร็จ'
