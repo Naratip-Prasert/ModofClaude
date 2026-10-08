@@ -36,10 +36,13 @@ async function tick($: EngineInterface) {
   const g = greeting(d.getHours())
   const fest = await festivalNow($, t)
   const s = await read($, streak)
+  // off unless asked for (/vibes status): the status row is shared, and a weather line reads better there
   $.ui.status(
-    `${g.icon} ${g.text} · ${thaiDate(d)} · ${clock(d)} · ${moon(t).icon}` +
-      (fest ? ` ${fest.icons}` : '') +
-      (s && s.days >= 2 ? ` · 🔥${s.days}` : ''),
+    (await $.store.get('showStatus')) === true
+      ? `${g.icon} ${g.text} · ${thaiDate(d)} · ${clock(d)} · ${moon(t).icon}` +
+          (fest ? ` ${fest.icons}` : '') +
+          (s && s.days >= 2 ? ` · 🔥${s.days}` : '')
+      : undefined,
   )
 
   // a gentle nudge at most once an hour after 23:00
@@ -68,7 +71,7 @@ async function markToday($: EngineInterface) {
 
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
-    await $.command.register({ name: 'vibes', description: 'แผง Thai Vibes · /vibes theme <ชื่อ|off|list> ลองธีมเทศกาล' })
+    await $.command.register({ name: 'vibes', description: 'แผง Thai Vibes · /vibes theme <ชื่อ|off> ลองธีมเทศกาล · /vibes status on|off แถบสถานะ' })
     await $.command.register({ name: 'vibes-quiet', description: 'Thai Vibes: ปิด/เปิดการแจ้งเตือนฉลอง streak และเตือนตอนดึก' })
     const t = await $.clock.now()
     await update($, stats, cur => cur ?? { startedAt: t, prompts: 0, turns: 0, lastActiveAt: t })
@@ -123,6 +126,12 @@ export const register: Register = on => {
 
   on('command.run', { command: 'vibes' }, async ($, e) => {
     const [head = '', arg = ''] = e.args.trim().toLowerCase().split(/\s+/)
+    if (head === 'status') {
+      const show = arg === 'on' ? true : arg === 'off' ? false : (await $.store.get('showStatus')) !== true
+      await $.store.set('showStatus', show)
+      await tick($)
+      return { text: show ? 'แสดงคำทักทายและวันที่ในแถบสถานะแล้ว (/vibes status off เพื่อซ่อน)' : 'ซ่อนจากแถบสถานะแล้ว (/vibes status on เพื่อแสดง)' }
+    }
     if (head === 'theme') {
       const list = Object.values(FESTIVALS).map(f => `${f.key} ${f.icons} ${f.name}`).join('\n')
       if (arg === 'off' || arg === '') {

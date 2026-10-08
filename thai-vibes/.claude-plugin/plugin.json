@@ -1,6 +1,6 @@
 {
   "name": "thai-vibes",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "แต่งหน้าจอ Claude Code: แถบสถานะทักทายตามเวลา วันที่ พ.ศ. ข้างขึ้นข้างแรม, แผง /vibes มีช้างน้อยขยับได้ streak วันเขียนโค้ด ธีมเทศกาล สุภาษิต และข้อความรอแบบไทย",
   "author": {
     "name": "Naratip-Prasert",
