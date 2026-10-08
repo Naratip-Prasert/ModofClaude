@@ -12,8 +12,8 @@
     {
       "name": "thai-prompt-kit",
       "source": "./thai-prompt-kit",
-      "description": "คำสั่งพรอมต์ภาษาไทย /th-* · แถบดาวให้คะแนนพรอมต์สดขณะพิมพ์ บอกว่าขาดอะไร (เป้าหมาย บริบท ข้อจำกัด รูปแบบ รายละเอียด) · สไตล์คำตอบครูไทย",
-      "version": "0.2.2",
+      "description": "คำสั่งพรอมต์ภาษาไทย /th-* · ดาวให้คะแนนพรอมต์สดขณะพิมพ์ บอกว่าขาดอะไร · แถบ context ในตัว (ดัดแปลงจาก context-bar ของ Boom-Vitt, MIT) · สไตล์คำตอบครูไทย",
+      "version": "0.3.0",
       "license": "MIT",
       "category": "productivity",
       "keywords": [

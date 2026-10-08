@@ -17,10 +17,28 @@ export type Score = {
   optional: Dim[]
 }
 
+// the context window breakdown (adapted from context-bar by Boom-Vitt, MIT)
+export type Cat = { name: string; tokens: number; color: string; kind: string }
+export type Fill = { cats: Cat[]; total: number; window: number; pct: number; compactAt: number | null }
+// seconds of prompt cache left; 'live' while a turn runs; null before the first turn
+export type Cache = number | 'live' | null
+
 declare module 'claude-code' {
   interface PluginState {
     // draft: the live score of what is in the prompt box now, null when there is nothing to coach
     // lastText: the last prompt sent, for /th-coach why with no text
-    'thai-prompt-kit': { coachMode: CoachMode; draft: Score | null; lastText: string | null; scored: number; starSum: number }
+    // fill, ctxHidden, cache, endsAt: the context section of the band; endsAt is in state so a
+    // hot reload keeps the countdown
+    'thai-prompt-kit': {
+      coachMode: CoachMode
+      draft: Score | null
+      lastText: string | null
+      scored: number
+      starSum: number
+      fill: Fill | null
+      ctxHidden: boolean
+      cache: Cache
+      endsAt: number | null
+    }
   }
 }
