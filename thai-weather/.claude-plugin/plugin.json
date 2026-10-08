@@ -1,0 +1,10 @@
+{
+  "name": "thai-weather",
+  "version": "0.1.0",
+  "description": "พยากรณ์อากาศในแถบสถานะ: อุณหภูมิ ฝนใน 6 ชั่วโมง และฝุ่น PM2.5 ของเมืองที่ตั้งไว้ (ข้อมูลจาก Open-Meteo); /weather set <จังหวัด>",
+  "author": { "name": "Naratip-Prasert", "url": "https://github.com/Naratip-Prasert" },
+  "license": "MIT",
+  "homepage": "https://github.com/Naratip-Prasert/ModofClaude",
+  "repository": "https://github.com/Naratip-Prasert/ModofClaude",
+  "keywords": ["weather", "thai", "statusline", "pm2.5"]
+}

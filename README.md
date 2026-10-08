@@ -11,6 +11,7 @@ claude plugin marketplace add Naratip-Prasert/ModofClaude --scope user
 claude plugin install thai-prompt-kit@modofclaude --scope user
 claude plugin install thai-vibes@modofclaude --scope user
 claude plugin install orange-cat@modofclaude --scope user
+claude plugin install thai-weather@modofclaude --scope user
 ```
 
 ติดตั้งเสร็จแล้วให้ปิดและเปิด Claude Code ใหม่ อัปเดตเป็นเวอร์ชันล่าสุดด้วย `claude plugin marketplace update modofclaude` แล้ว `claude plugin update <ชื่อม็อด>@modofclaude`
@@ -79,6 +80,19 @@ claude plugin install orange-cat@modofclaude --scope user
 - **`/cat`** เปิดแผงที่มีแมวส้มวิ่งไปมา
 - ทุกครั้งที่คำสั่งหรือเครื่องมือที่ Claude ใช้เกิด error แมวจะตกใจทำตาโต `( O.O )` แล้วกระโดด พร้อมนับว่า error ไปแล้วกี่ครั้ง
 
+### ⛅ thai-weather: พยากรณ์อากาศในแถบสถานะ
+
+```
+☀️ 33° เชียงใหม่ · ☔ ฝน 60% 15 น. · PM2.5 28
+```
+
+- **แถบสถานะ:** แสดงอุณหภูมิ ท้องฟ้า โอกาสฝนตกที่สูงที่สุดใน 6 ชั่วโมงข้างหน้า (แสดงเมื่อ 40% ขึ้นไป) และฝุ่น PM2.5 ถ้าค่าเกิน 75 จะมี 😷
+- **ไม่ต้องเปิด GPS:** บอกเมืองครั้งเดียวด้วย `/weather set เชียงใหม่` ใช้ชื่อภาษาไทยหรืออังกฤษก็ได้ ระบบจะหาในไทยก่อน ถ้าไม่เจอจึงหาเมืองในประเทศอื่น และจำเมืองไว้ในเครื่องคุณ
+- **`/weather`:** ดูรายละเอียด ได้แก่ อุณหภูมิที่รู้สึก ความชื้น และควรพกร่มหรือไม่ · `/weather off` หรือ `/weather on` ปิดหรือเปิด
+- **อัปเดตทุก 30 นาที** ใช้ข้อมูลจาก [Open-Meteo](https://open-meteo.com) ซึ่งฟรีและไม่ต้องใช้ API key (ข้อมูลใช้สัญญาอนุญาต CC BY 4.0)
+
+ติดตั้งด้วย `claude plugin install thai-weather@modofclaude --scope user`
+
 ### 🐈 แถม: แมวใน prompt ของ PowerShell
 
 ไม่ใช่ม็อดของ Claude Code แต่เป็นไฟล์ [powershell/orange-cat-prompt.ps1](powershell/orange-cat-prompt.ps1) ที่ทำให้ช่อง Terminal ของ PowerShell มีแมวนำหน้า และตกใจเมื่อคำสั่งที่คุณพิมพ์เองเกิด error
@@ -99,7 +113,15 @@ claude plugin install orange-cat@modofclaude --scope user
 
 ## ความเป็นส่วนตัว
 
-ม็อดทั้งหมดไม่เรียกเครือข่าย ไม่เรียกโมเดล และไม่ส่งข้อมูลออกไปเอง ตรวจได้จากบรรทัด `calls:` ของคำสั่ง `claude plugin validate <ม็อด>`
+ม็อดทั้งหมดไม่เรียกโมเดล และทุกตัวยกเว้น thai-weather ไม่ต่อเครือข่ายและไม่ส่งข้อมูลออกไปเอง
+
+**thai-weather** ต่ออินเทอร์เน็ตไปที่ Open-Meteo เท่านั้น สิ่งที่ส่งออกไปมีดังนี้:
+- ชื่อเมืองที่พิมพ์ใน `/weather set` ส่งครั้งเดียวตอนตั้งค่า
+- พิกัดของเมืองนั้นที่ปัดเหลือทศนิยม 2 ตำแหน่ง (ราว 1 กม.) ส่งทุก 30 นาที
+
+ม็อดไม่ใช้ GPS ไม่ดูตำแหน่งจาก IP และไม่ส่งพรอมต์หรือโค้ดของคุณออกไป Open-Meteo จะเห็น IP ของเครื่องคุณตามปกติของการต่ออินเทอร์เน็ต ปิดได้ด้วย `/weather off`
+
+ตรวจสอบเองได้จากบรรทัด `calls:` ของคำสั่ง `claude plugin validate <ม็อด>` ม็อดที่ต่อเครือข่ายจะมี `$.http.fetch` อยู่ในบรรทัดนั้น
 
 ## พัฒนาต่อ
 

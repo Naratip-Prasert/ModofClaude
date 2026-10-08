@@ -6,7 +6,7 @@
     "url": "https://github.com/Naratip-Prasert"
   },
   "metadata": {
-    "description": "Claude Code mods สำหรับคนไทย: ชุดพรอมต์ภาษาไทย ธีมหน้าจอ และแมวส้ม"
+    "description": "Claude Code mods สำหรับคนไทย: ชุดพรอมต์ภาษาไทย ธีมหน้าจอ แมวส้ม และพยากรณ์อากาศ"
   },
   "plugins": [
     {
@@ -46,6 +46,19 @@
         "cat",
         "fun",
         "error"
+      ]
+    },
+    {
+      "name": "thai-weather",
+      "source": "./thai-weather",
+      "description": "พยากรณ์อากาศในแถบสถานะ: อุณหภูมิ ฝนใน 6 ชั่วโมง และ PM2.5 ของเมืองที่ตั้งไว้ ไม่ใช้ GPS (ต่อเน็ตไปที่ Open-Meteo)",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": [
+        "weather",
+        "thai",
+        "statusline"
       ]
     }
   ]
